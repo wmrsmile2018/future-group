@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,11 +10,9 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
-import { connect } from 'react-redux';
-import isEmpty from 'lodash/isEmpty'
+
 import './style.scss'
 
-// import { useTable } from '../../App';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -81,11 +80,6 @@ const EnhancedTable = ({rows, classN, handleClick}) => {
   const [orderBy, setOrderBy] = useState('calories');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [user, setUser] = useState({})
-
-  // const table = useTable()
-  // const { page, rowsPerPage, setPage, setRowsPerPage } = table
-  // console.log(table);
 
   const createSortHandler = (property) => (event) => {
     handleRequestSort(event, property);
@@ -105,9 +99,6 @@ const EnhancedTable = ({rows, classN, handleClick}) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-
-
 
   return (
     <div className={`${classN}__${classes.root} ${classes.root}`}>

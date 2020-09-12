@@ -1,4 +1,4 @@
-.App__loading {
+.loading {
   background: #bbbbbb87;
   height: 100%;
   width: 100%;
@@ -11,10 +11,4 @@
     width: 100px!important;
     height: 100px!important;
   }
-}
-
-.App__showForm {
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 30px;
 }
