@@ -1,0 +1,18 @@
+.table__needs-validation {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 25px;
+  button {
+    height: 38px;
+    margin-top: 31px;
+  }
+
+  .invalid-feedback {
+    display: block;
+    position: absolute;
+    top: 145px;
+    right: 235px;
+    width: 396px;
+    font-size: 100%;
+  }
+}
