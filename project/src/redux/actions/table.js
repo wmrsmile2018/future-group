@@ -14,7 +14,7 @@ export const GetTableSuccess = (data) => ({
 export const GetTableFail = (error) => ({
   type: `${GET_TABLE}_FAIL`,
   payload: {
-    error
+    ...error
   }
 })
 
@@ -38,7 +38,7 @@ export const AddRowSuccess = (data) => ({
 export const AddRowFail = (error) => ({
   type: `${ADD_ROW}_FAIL`,
   payload: {
-    error
+    ...error
   }
 })
 

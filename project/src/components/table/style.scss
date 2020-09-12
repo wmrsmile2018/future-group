@@ -32,3 +32,22 @@
   }
 
 }
+
+.about {
+  width: 80%;
+  margin: 0 auto;
+  border-top: 1px solid #a8a8f7;
+  margin-top: 10px;
+  padding-top: 10px;
+  .about__user, .about__description, .about__address, .about__city, .about__state, .about__zip, {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+  }
+  .about-header {
+    width: 200px;
+  }
+  .about-body {
+    width: calc(100% - 200px);
+  }
+}

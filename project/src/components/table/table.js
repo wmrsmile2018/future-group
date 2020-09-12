@@ -11,9 +11,6 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
 
-import './style.scss'
-
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -80,18 +77,24 @@ const EnhancedTable = ({rows, classN, handleClick}) => {
   const [orderBy, setOrderBy] = useState('calories');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [selected, setSelected] = useState([])
+
+  const handleClickSelect = (e, key) => {
+    handleClick(e)
+    setSelected([key]);
+  }
 
   const createSortHandler = (property) => (event) => {
     handleRequestSort(event, property);
   };
 
-  const handleRequestSort = (event, property) => {
+  const handleRequestSort = (_, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (_, newPage) => {
     setPage(newPage);
   };
 
@@ -100,13 +103,16 @@ const EnhancedTable = ({rows, classN, handleClick}) => {
     setPage(0);
   };
 
+  const isSelected = (key) => selected.indexOf(key) !== -1;
+
   return (
     <div className={`${classN}__${classes.root} ${classes.root}`}>
       <Paper className={classes.paper}>
         <TableContainer>
           <Table
+            stickyHeader
             className={classes.table}
-            aria-labelledby="tableTitle"
+            aria-label="sticky table"
           >
             <TableHead>
               <TableRow>
@@ -137,13 +143,15 @@ const EnhancedTable = ({rows, classN, handleClick}) => {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
+                  const isItemSelected = isSelected(row.id + row.email);
                   return (
                     <TableRow
                       hover
                       tabIndex={-1}
                       key={row.id + row.email }
-                      onClick={handleClick}
+                      onClick={(e) => handleClickSelect(e, row.id + row.email)}
                       data-key={`${row.id } ${row.email}`}
+                      selected={isItemSelected}
                     >
                       <TableCell component="th" scope="row" padding="none" data-key={`${row.id } ${row.email}`}>
                         {row.id}

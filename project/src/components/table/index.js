@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
-
+import './style.scss'
 import { GetTableCall, AddRowCall } from '../../redux/actions/table';
 import EnhancedTable from './table';
 import About from './about';
@@ -37,7 +37,7 @@ const Table = ({ storeRows, isLoading, GetTableCall, AddRowCall }) => {
   const [user, setUser] = useState({})
   const [showForm, setShowForm] = useState(false);
   const [disableButton, setDisableButton] = useState(true);
-
+  
   const id = useInput('')
   const firstName = useInput('')
   const lastName = useInput('')
@@ -76,6 +76,12 @@ const Table = ({ storeRows, isLoading, GetTableCall, AddRowCall }) => {
       setShowMessage(false)
       AddRowCall({id: id.value, firstName: firstName.value, lastName: lastName.value,
         email: email.value, phone: formatPhoneNumber(phone.value)})
+      id.clear();
+      firstName.clear();
+      lastName.clear();
+      email.clear();
+      phone.clear();
+      search.clear();
     } else {
       setShowMessage(true)
     }

@@ -14,7 +14,6 @@ import { instance } from '../../utils/axios';
 
 function* getTable(data) {
   yield put(GetTableStart());
-  console.log(data);
   try {
     let response;
     if (data.start && data.end) {
@@ -28,8 +27,9 @@ function* getTable(data) {
     }
     yield put(GetTableSuccess(response.data))
   } catch(error) {
-    // console.log(error);
-    yield put(GetTableFail());
+    const err = error.message === 'Network Error' ? {status: error.message} :
+    {status: error.response.status, statusText: error.response.statusText}
+    yield put(GetTableFail(err));
   }
 }
 
@@ -45,10 +45,11 @@ function* addRow(data) {
           email: data.email
         })
     );
-    console.log(response);
     yield put(AddRowSuccess(response.data))
   } catch(error) {
-    yield put(AddRowFail());
+    const err = error.message === 'Network Error' ? {status: error.message} :
+    {status: error.response.status, status: error.response.statusText}
+    yield put(AddRowFail(err));
   }
 }
 

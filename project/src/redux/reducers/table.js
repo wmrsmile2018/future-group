@@ -6,6 +6,7 @@ import {
 const initialState = {
   loading: false,
   rows: [],
+  error: {}
 };
 
 export const table = function reducer(state = initialState, action) {
@@ -21,10 +22,11 @@ export const table = function reducer(state = initialState, action) {
         loading: false,
       }
     case `${GET_TABLE}_FAIL`:
+      console.log(action.payload);
       return {
         ...state,
         loading: false,
-        error: action.payload.error
+        error: action.payload
       }
     case`${ADD_ROW}_START`:
       return {
