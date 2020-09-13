@@ -22,7 +22,7 @@ function* getTable(data) {
       );
     } else {
       response = yield call (
-        () => instance.get(`${host}`)
+        () => instance.get(`${host}/`)
       );
     }
     yield put(GetTableSuccess(response.data))
