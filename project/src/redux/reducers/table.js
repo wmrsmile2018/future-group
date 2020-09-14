@@ -6,7 +6,7 @@ import {
 const initialState = {
   loading: false,
   rows: [],
-  error: {}
+  error: {},
 };
 
 export const table = function reducer(state = initialState, action) {

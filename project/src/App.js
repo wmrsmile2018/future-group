@@ -1,12 +1,16 @@
 import React, {useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import Table from './components/table/index';
 import Loading from './components/loading/index';
 import isEmpty from 'lodash/isEmpty';
 
-const App = ({ storeRows, isLoading, error }) => {
+const App = () => {
   const [showCircular, setShowCircular] = useState(true);
   const [rows, setRows] = useState([])
+
+  const isLoading = useSelector(state => state.table.isLoading)
+  const error = useSelector(state => state.table.error)
+  const storeRows = useSelector(state => state.table.rows)
 
   useEffect(() => {
     if (storeRows.length && !isLoading) {
@@ -30,8 +34,4 @@ const App = ({ storeRows, isLoading, error }) => {
   );
 }
 
-export default connect(state => ({
-  storeRows: state.table.rows,
-  isLoading: state.table.loading,
-  error: state.table.error
-}))(App);
+export default App;

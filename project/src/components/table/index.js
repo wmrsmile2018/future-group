@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 import './style.scss'
 import { GetTableCall, AddRowCall } from '../../redux/actions/table';
 import EnhancedTable from './table';
 import About from './about'
-
-
 
 const useInput = (initialValue) => {
   const [value, setValue] = useState(initialValue);
@@ -33,7 +31,7 @@ const formatPhoneNumber = (phoneNumberString) => {
   return null
 }
 
-const Table = ({ storeRows, isLoading, GetTableCall, AddRowCall }) => {
+const Table = () => {
   const [rows, setRows] = useState([])
   const [showMessage, setShowMessage] = useState(false);
   const [user, setUser] = useState({})
@@ -57,7 +55,11 @@ const Table = ({ storeRows, isLoading, GetTableCall, AddRowCall }) => {
     {col: "col-2", label: "Phone", type: "text", placeholder: "9773881686", bind: phone.bind}
   ]
 
+  useEffect((state) => {
+    dispatch(GetTableCall())
+  }, [GetTableCall, dispatch])
 
+  const storeRows = useSelector(state => state.table.rows)
   useEffect(() => {
     setRows(storeRows)
   }, [storeRows])
@@ -75,8 +77,8 @@ const Table = ({ storeRows, isLoading, GetTableCall, AddRowCall }) => {
   const handleSubmit = (e) => {
     if (rows.findIndex(x => x.id.toString() === id.value.toString()) === -1) {
       setShowMessage(false)
-      AddRowCall({id: id.value, firstName: firstName.value, lastName: lastName.value,
-        email: email.value, phone: formatPhoneNumber(phone.value)})
+      dispatch(AddRowCall({id: id.value, firstName: firstName.value, lastName: lastName.value,
+        email: email.value, phone: formatPhoneNumber(phone.value)}))
       id.clear();
       firstName.clear();
       lastName.clear();
@@ -178,5 +180,4 @@ const Table = ({ storeRows, isLoading, GetTableCall, AddRowCall }) => {
 
 
 
-export default connect(state => ({
-}), { GetTableCall, AddRowCall })(Table);
+export default Table

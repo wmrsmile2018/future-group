@@ -13,7 +13,6 @@ import { GET_TABLE, ADD_ROW, host } from '../../constants';
 import { instance } from '../../utils/axios';
 
 function* getTable() {
-  console.log("pew pew");
   yield put(GetTableStart());
   try {
     const response = yield call (
