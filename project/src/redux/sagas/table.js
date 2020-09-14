@@ -12,19 +12,13 @@ import {
 import { GET_TABLE, ADD_ROW, host } from '../../constants';
 import { instance } from '../../utils/axios';
 
-function* getTable(data) {
+function* getTable() {
+  console.log("pew pew");
   yield put(GetTableStart());
   try {
-    let response;
-    if (data.start && data.end) {
-      response = yield call (
-        () => instance.get(`${host}/?_start=${data.start}&_end=${data.end}`)
-      );
-    } else {
-      response = yield call (
-        () => instance.get(`${host}/`)
-      );
-    }
+    const response = yield call (
+      () => instance.get(`${host}/`)
+    );
     yield put(GetTableSuccess(response.data))
   } catch(error) {
     const err = error.message === 'Network Error' ? {status: error.message} :
@@ -48,7 +42,7 @@ function* addRow(data) {
     yield put(AddRowSuccess(response.data))
   } catch(error) {
     const err = error.message === 'Network Error' ? {status: error.message} :
-    {status: error.response.status, status: error.response.statusText}
+    {status: error.response.status, statusText: error.response.statusText}
     yield put(AddRowFail(err));
   }
 }

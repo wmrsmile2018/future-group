@@ -9,9 +9,8 @@ RUN apt-get update \
 
 RUN npm install -g json-server
 
-RUN echo > /tmp/test.json
-EXPOSE 8080
-ENTRYPOINT ["json-server", "--watch", "--port", "8080", "--host", "0.0.0.0"]
+#COPY db.json /tmp/test.json
 
+ENTRYPOINT ["json-server", "--watch", "--port", "8080", "--host", "0.0.0.0"]
 
 CMD ["/tmp/test.json"]

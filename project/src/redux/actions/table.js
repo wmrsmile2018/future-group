@@ -18,10 +18,10 @@ export const GetTableFail = (error) => ({
   }
 })
 
-export const GetTableCall = (data) => ({
-  type: `${GET_TABLE}`,
-  ...data
-})
+export const GetTableCall = () => {
+  console.log("pew pew1");
+  return {type: `${GET_TABLE}`}
+}
 ////////////////////////////////////////////////////////////////////////////////
 
 export const AddRowStart = () => ({

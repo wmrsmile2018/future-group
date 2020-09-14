@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 import './style.scss'
 import { GetTableCall, AddRowCall } from '../../redux/actions/table';
 import EnhancedTable from './table';
-import About from './about';
+import About from './about'
+
+
 
 const useInput = (initialValue) => {
   const [value, setValue] = useState(initialValue);
@@ -37,7 +39,9 @@ const Table = ({ storeRows, isLoading, GetTableCall, AddRowCall }) => {
   const [user, setUser] = useState({})
   const [showForm, setShowForm] = useState(false);
   const [disableButton, setDisableButton] = useState(true);
-  
+
+  const dispatch = useDispatch()
+
   const id = useInput('')
   const firstName = useInput('')
   const lastName = useInput('')
@@ -53,15 +57,12 @@ const Table = ({ storeRows, isLoading, GetTableCall, AddRowCall }) => {
     {col: "col-2", label: "Phone", type: "text", placeholder: "9773881686", bind: phone.bind}
   ]
 
-  useEffect(() => {
-    GetTableCall()
-  }, [])
 
   useEffect(() => {
     setRows(storeRows)
   }, [storeRows])
 
-  useEffect(() => {
+  useEffect((state) => {
     if(id.value !== '' && firstName.value !== '' && lastName.value !== '' &&
       email.value !== '' && phone.value.toString().length === 10) {
       setDisableButton(false)
