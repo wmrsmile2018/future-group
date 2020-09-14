@@ -12,6 +12,7 @@ git clone https://github.com/wmrsmile2018/future-group.git
 cd future-group/project/
 npm install
 ```
+## Run Project without Docker
 
 ## Run Json-server
 
@@ -33,13 +34,14 @@ cd future-group/project/
 npm start
 ```
 
-Run project using ###Docker
+## Run project using ###Docker
 
 I've put development build in Docker. There are some bugs in production environment. Unfortunately, I haven't found a solution yet. And there is no time left to debug the project
 
 Project work at ```localhost:3000```
 ```
-docker build -t jsonserver ./db
+cd future-group/db
+docker build -t jsonserver .
 
 cd future-group/project
 docker build -t future-group:0.0.1 .
