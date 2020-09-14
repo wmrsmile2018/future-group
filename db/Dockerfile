@@ -9,7 +9,7 @@ RUN apt-get update \
 
 RUN npm install -g json-server
 
-#COPY db.json /tmp/test.json
+COPY db.json /tmp/test.json
 
 ENTRYPOINT ["json-server", "--watch", "--port", "8080", "--host", "0.0.0.0"]
 

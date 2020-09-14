@@ -34,6 +34,9 @@ npm start
 ```
 
 Run project using ###Docker
+
+I've put development build in Docker. There are some bugs in production environment. Unfortunately, I haven't found a solution yet. And there is no time left to debug the project
+
 Project work at ```localhost:3000```
 ```
 docker build -t jsonserver ./db

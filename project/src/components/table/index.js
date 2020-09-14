@@ -99,7 +99,7 @@ const Table = () => {
 
   const handleClickSearch = () => {
     if (search.value !== '') {
-      const result = rows.filter(val => `${val.id} ${val.firstName} ${val.lastName}
+      const result = storeRows.filter(val => `${val.id} ${val.firstName} ${val.lastName}
         ${val.email} ${val.phone}`.indexOf(search.value) !== -1)
       setRows(result)
     } else {
